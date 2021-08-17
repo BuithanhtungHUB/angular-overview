@@ -1,0 +1,78 @@
+
+<div class="card">
+  <div class="card-header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+     User List
+  </div>
+  <!--  <input #element type="range" min="100" max="400" value="150" (change)="changeImageSize(element.value)">-->
+  <input type="range" min="100" max="400" value="150" [(ngModel)]="imageSize">
+  <input type="color" [(ngModel)]="textColor" >
+  <div>
+    <label>Color</label>
+<!--    R<input #elementR type="range" min="0" max="255" value="0" (input)="changeTextColorR(elementR.value)" >-->
+<!--    G<input #elementG type="range" min="0" max="255" value="0" (input)="changeTextColorG(elementG.value)" >-->
+<!--    B<input #elementB type="range" min="0" max="255" value="0" (input)="changeTextColorB(elementB.value)" >-->
+
+        R<input [(ngModel)]="textColorR" type="range" min="0" max="255" value="0" >
+        G<input [(ngModel)]="textColorG" type="range" min="0" max="255" value="0" >
+        B<input [(ngModel)]="textColorB" type="range" min="0" max="255" value="0" >
+  </div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead>
+      <tr [style.color]="getColor()">
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col">Image</th>
+        <th scope="col">Age</th>
+        <th scope="col">Address</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <th [style.color]="getColor()" scope="row">{{i + 1}}</th>
+<!--        <td [style.color]="textColor">{{user.name}}</td>-->
+        <td [style.color]="getColor()">{{user.name}}</td>
+        <td><img [src]="user.image" [width]="imageSize" alt=""></td>
+        <td [style.color]="getColor()">{{user.age}}</td>
+        <td [style.color]="getColor()">{{user.address}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
