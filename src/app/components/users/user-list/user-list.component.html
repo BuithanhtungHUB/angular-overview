@@ -1,0 +1,63 @@
+<div class="card mt-2">
+  <div class="card-header">
+    {{pageTitle}}
+    <div class="d-flex mt-2">
+<!--      <input class="form-control me-2" type="text" (keyup)="searchUser($event)" placeholder="Search" aria-label="Search">-->
+      <input class="form-control me-2" type="text" [(ngModel)]="searchInput" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </div>
+  </div>
+  <div class="card-body ">
+    <button class="btn btn-success" (click)="showHideImage()">Show/Hide Image</button>
+    <button class="btn btn-primary" (click)="showHideMenu()">Show/Hide Menu</button>
+    <div [hidden]="showMenu">
+      <label>Image Size:</label>
+      <!--su dung noi suy-->
+      <!--<input #element type="range" min="100" max="400" value="150" (change)="changeImageSize(element.value)">-->
+      <!--su dung two way binding-->
+      <input type="range" min="100" max="500" value="100" [(ngModel)]="imageSize">
+      <input type="text" style="width: 40px" [(ngModel)]="imageSize" readonly>px
+    </div>
+    <div [hidden]="showMenu">
+<!--          R<input #elementR type="range" min="0" max="255" value="0" (input)="changeTextColorR(elementR.value)" >-->
+<!--          G<input #elementG type="range" min="0" max="255" value="0" (input)="changeTextColorG(elementG.value)" >-->
+<!--          B<input #elementB type="range" min="0" max="255" value="0" (input)="changeTextColorB(elementB.value)" >-->
+      Red: <input [(ngModel)]="textColorR" type="range" min="0" max="255" value="255">
+      <input type="text" style="width: 40px" [(ngModel)]="textColorR" readonly>
+      Green: <input [(ngModel)]="textColorG" type="range" min="0" max="255" value="255">
+      <input type="text" style="width: 40px" [(ngModel)]="textColorG" readonly>
+      Blue: <input [(ngModel)]="textColorB" type="range" min="0" max="255" value="255">
+      <input type="text" style="width: 40px" [(ngModel)]="textColorB" readonly>
+    </div>
+    <table class="table table-dark table-hover table-bordered border-info mt-2">
+      <thead>
+      <tr [style.color]="getColor()">
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th [hidden]="showImage" scope="col">Image</th>
+        <th scope="col">Email</th>
+        <th scope="col">Age</th>
+        <th scope="col">Address</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr [style.color]="getColor()"  *ngFor="let user of users | filter: searchInput:[ 'address', 'name', 'email']; let i = index  ">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{user.name}}</td>
+        <td [hidden]="showImage">
+          <img *ngIf="user.image" [src]="user.image" [width]="imageSize" alt="">
+          <p *ngIf="!user.image">No Image</p>
+        </td>
+        <td>{{user.email}}</td>
+        <td>{{user.age}}</td>
+        <td>{{user.address}}</td>
+        <td>
+            <button class="btn btn-danger" (click)="deleteUser(i)">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
